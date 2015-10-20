@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:c="http://java.sun.com/jsp/jstl/core">
+
+<h:head>
+	<title><ui:insert name="titulo">Sistema do Aluno</ui:insert></title>
+	<h:outputStylesheet library="css" name="estilo.css" />
+</h:head>
+
+<h:body>
+	<div id="corpo">
+		<p:growl id="msgGlobal" sticky="true" />
+		<p:layout fullPage="true">
+			<p:layoutUnit position="north" header="Sistema de Controle de Notas"
+				resizable="true" closable="true" collapsible="true"
+				style="text-align:center;" id="header">
+			<h:graphicImage library="img" name="coruja.jpg"
+					width="100px" height="100px" id="logo" /> 
+			</p:layoutUnit>			
+			<footer> <p:layoutUnit position="south" header="Sistema de Controle de Notas - CHA" 
+			resizable="false" closable="false" collapsible="false">	 </p:layoutUnit> </footer>
+			<p:layoutUnit position="west" size="250" resizable="false"
+				closable="false" collapsible="false">
+				<h:form>
+					<p:panelMenu>
+						<p:submenu label="Arquivo">
+							<p:menuitem value="Principal" outcome="home.xhtml"/>
+							<p:menuitem value="Help" />
+						</p:submenu>
+						<p:submenu label="Cadastros">
+							<p:menuitem value="Professores" />
+							<p:menuitem value="Disciplinas" />
+							<p:menuitem value="Alunos" />
+						</p:submenu>
+						<p:submenu label="Grades">
+							<p:menuitem value="Novo" />
+						</p:submenu>
+					</p:panelMenu>
+				</h:form>
+			</p:layoutUnit>
+			<p:layoutUnit position="center" resizable="true" closable="true"
+				collapsible="true">
+				<ui:insert name="conteudo" >
+				</ui:insert>
+			</p:layoutUnit>
+		</p:layout>
+	</div>
+</h:body>
+</html>
