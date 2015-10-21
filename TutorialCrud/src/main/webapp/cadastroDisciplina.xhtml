@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition template="/template.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:c="http://java.sun.com/jsp/jstl/core">
+	<ui:define name="metadata">
+		<f:metadata>
+			<f:event listener="#{disciplinaController.iniciarTela}"
+				type="preRenderView" />
+		</f:metadata>
+	</ui:define>
+
+	<ui:define name="titulo">Cadastro de Aluno</ui:define>
+	<ui:define name="conteudo">
+
+		<h:form id="frmDis">
+			<p:messages autoUpdate="true" />
+
+
+			<p:panelGrid columns="2" id="pnlDis"
+				style="width: 100%; margin-top: 20px" columnClasses="rotulo, campo">
+
+				<p:outputLabel value="Nome" for="nome" />
+				<p:inputText id="nome" size="60" maxlength="80"
+					value="#{disciplinaController.disciplina.nome}" required="true"
+					label="nome" validator="#{disciplinaController.validarEspacoBranco}"/>
+
+				<p:outputLabel value="Descrição" for="descricao" />
+				<p:inputText id="descricao"
+					value="#{disciplinaController.disciplina.descricao}" label="desc" />
+
+				<p:outputLabel value="Sigla" for="sigla" />
+				<p:inputText id="sigla" size="5" maxlength="5"
+					value="#{disciplinaController.disciplina.sigla}" label="sigla" />
+
+
+				
+				<p:panel id="pnlRodape" >
+					<p:commandButton value="Salvar"
+						action="#{disciplinaController.salvar}" update="frmDis"/>
+					<p:commandButton value="Limpar" type="reset" />
+				</p:panel>
+
+
+			</p:panelGrid>
+		</h:form>
+	</ui:define>
+</ui:composition>

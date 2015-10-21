@@ -7,45 +7,70 @@
 	xmlns:p="http://primefaces.org/ui"
 	xmlns:c="http://java.sun.com/jsp/jstl/core">
 
+<ui:insert name="metadata" />
 <h:head>
 	<title><ui:insert name="titulo">Sistema do Aluno</ui:insert></title>
 	<h:outputStylesheet library="css" name="estilo.css" />
 </h:head>
 
 <h:body>
+<p:ajaxStatus onstart="PF('statusDialog').show()" onsuccess="PF('statusDialog').hide()" />  
+<p:dialog widgetVar="statusDialog" modal="true" draggable="false" closable="false" resizable="false" showHeader="false">
+<p:graphicImage library="img" name="loading.gif" width="40px" height="40px"/>
+
+</p:dialog>
+
+<p:growl id="growl" showDetail="true" sticky="true" />  
 	<div id="corpo">
 		<p:growl id="msgGlobal" sticky="true" />
 		<p:layout fullPage="true">
 			<p:layoutUnit position="north" header="Sistema de Controle de Notas"
 				resizable="true" closable="true" collapsible="true"
 				style="text-align:center;" id="header">
-			<h:graphicImage library="img" name="coruja.jpg"
-					width="100px" height="100px" id="logo" /> 
-			</p:layoutUnit>			
-			<footer> <p:layoutUnit position="south" header="Sistema de Controle de Notas - CHA" 
-			resizable="false" closable="false" collapsible="false">	 </p:layoutUnit> </footer>
+				<h:graphicImage library="img" name="coruja.jpg" width="100px"
+					height="100px" id="logo" />
+			</p:layoutUnit>
+			<footer> <p:layoutUnit position="south"
+				header="Sistema de Controle de Notas - CHA" resizable="false"
+				closable="false" collapsible="false">
+			</p:layoutUnit> </footer>
 			<p:layoutUnit position="west" size="250" resizable="false"
 				closable="false" collapsible="false">
 				<h:form>
 					<p:panelMenu>
 						<p:submenu label="Arquivo">
-							<p:menuitem value="Principal" outcome="home.xhtml"/>
+							<p:menuitem value="Principal" outcome="home.xhtml" />
 							<p:menuitem value="Help" />
 						</p:submenu>
 						<p:submenu label="Cadastros">
 							<p:menuitem value="Professores" />
-							<p:menuitem value="Disciplinas" />
-							<p:menuitem value="Alunos" />
+							<p:menuitem value="Disciplinas" outcome="cadastroDisciplina"/>
+							<p:menuitem value="Alunos" outcome="cadastroAluno"/>
+						</p:submenu>
+						<p:submenu label="Pesquisas">
+							<p:menuitem value="Professores" />
+							<p:menuitem value="Disciplinas" outcome="pesquisaDisciplina"/>
+							<p:menuitem value="Alunos" outcome="pesquisaAluno"/>
 						</p:submenu>
 						<p:submenu label="Grades">
 							<p:menuitem value="Novo" />
 						</p:submenu>
 					</p:panelMenu>
+
+				</h:form>
+				<h:form id="relogio">
+					<!--  <h3 style="margin-top: 0">Client</h3>-->
+					<p:spacer style="margin-top:20px;"/>
+					<p:clock />
+
+					<!--<h3>Server</h3>
+					<p:clock pattern="HH:mm:ss dd.MM.yyyy" mode="server" />
+					-->
 				</h:form>
 			</p:layoutUnit>
 			<p:layoutUnit position="center" resizable="true" closable="true"
 				collapsible="true">
-				<ui:insert name="conteudo" >
+				<ui:insert name="conteudo">
 				</ui:insert>
 			</p:layoutUnit>
 		</p:layout>

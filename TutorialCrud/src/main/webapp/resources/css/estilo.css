@@ -18,6 +18,11 @@ body {
 	margin: 0 auto !important;		
 }
 
+#relogio {
+	margin-top: 20px;
+	margin-left: 15px;;		
+}
+
 #conteudo {
 	padding: 0px 8px;
 	margin-top: 50px;

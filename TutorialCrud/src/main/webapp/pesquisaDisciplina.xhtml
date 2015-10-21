@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition template="/template.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:o="http://omnifaces.org/ui">
+	<ui:define name="metadata">
+		<f:metadata>
+			<o:viewParam name="id" value="#{disciplinaController.disciplina}" />
+			<f:event listener="#{disciplinaController.consultar}"
+				type="preRenderView" />
+		</f:metadata>
+	</ui:define>
+
+	<ui:define name="titulo">Cadastro de Aluno</ui:define>
+	<ui:define name="conteudo">
+
+
+
+		<h:form id="frmPesquisa">
+			<p:messages id="msg" />
+			<h1>Pesquisa de Disciplina</h1>
+			<p:toolbar style="margin-top:20px;">
+				<p:toolbarGroup>
+					<p:button value="Novo" outcome="cadastroDisciplina"
+						icon="ui-icon-document" />
+
+				</p:toolbarGroup>
+				<p:toolbarGroup align="right">
+					<p:button value="Pesquisa" outcome="pesquisaDisciplina"
+						icon="ui-icon-search" />
+				</p:toolbarGroup>
+			</p:toolbar>
+
+
+			<p:separator style="padding:5px;" />
+
+
+			<p:dataTable id="disciplinasTable"
+				value="#{disciplinaController.listaDisciplinas}" var="disciplina"
+				emptyMessage="Nenhum médico encontrado" rows="5" paginator="true"
+				paginatorAlwaysVisible="false" paginatorPosition="bottom"
+				rowsPerPageLabel="5, 10, 15, 20" scrollable="true">
+
+				<f:facet name="header">	Médicos Cadastrados</f:facet>
+
+
+				<p:column headerText="Nome" sortBy="#{disciplina.nome}"
+					filterBy="#{disciplina.nome}">
+					<h:outputText value="#{disciplina.nome}" />
+				</p:column>
+
+				<p:column headerText="Sigla" sortBy="#{disciplina.sigla}"
+					filterBy="#{disciplina.sigla}">
+					<h:outputText value="#{disciplina.sigla}" />
+				</p:column>
+
+
+				<p:column headerText="Ações"
+					style="text-align: center; width: 100px">
+					<p:button icon="ui-icon-pencil" title="Editar"
+						outcome="cadastroDisciplina">
+						<f:param name="disciplina" value="#{disciplina.id}" />
+					</p:button>
+
+					<p:commandButton icon="ui-icon-trash" title="Excluir"
+						process="@this" update="@form"
+						actionListener="#{disciplinaController.remover}" />
+				</p:column>
+
+			</p:dataTable>
+
+			<p:confirmDialog header="Exclusão de Disciplina"
+				message="Tem certeza que deseja excluir a Disciplina #{disciplina.nome}"
+				widgetVar="confirmacaoExclusao" id="confirmacaoExclusaoDialog">
+				<p:button value="Não" oncomplete="confirmacaoExclusao.hide();" />
+				<p:commandButton value="Sim"
+					oncomplete="PF('confirmacaoExclusao').hide();" process="@this"
+					update=":frmPesquisa:disciplinasTable" />
+			</p:confirmDialog>
+
+		</h:form>
+
+	</ui:define>
+</ui:composition>
